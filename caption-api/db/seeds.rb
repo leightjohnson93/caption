@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Photo.delete_all
+Photo.create(
+  [
+  {
+    caption: "A new cake recipe",
+  },
+  {
+    caption: "A twitter client idea",
+  },
+  {
+    caption: "A novel set in Italy",
+  },
+  {
+    caption: "Card game design"
+  }
+])
+
+
+Photo.find(25).image.attach(io: File.open('./lib/seeds/lights.jpg'), filename: 'lights.jpg')

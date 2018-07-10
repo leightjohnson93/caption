@@ -1,27 +1,18 @@
 module Api::V1
   class PhotosController < ApplicationController
     def index
-      @photos = Photo.all
+      @photos = Photo.order("created_at DESC")
       render json: @photos
     end
 
-    def show
-      @photo = Photo.find(params[:id])
-    end
-
-    def new
-      @photo = Photo.new
-    end
-
     def create
-      @photo = Photo.new(photo_params)
-      if @photo.save
-        flash[:success] = 'Photo sucessfully posted.'
-        redirect_to @photo
-      else
-        flash[:danger] = 'There was a problem posting the photo.'
-        render 'new'
-      end
+      @photo = Photo.create(photo_params)
+      render json: @photo
     end
+
+    private
+      def photo_params
+        params.require(:photo).permit(:caption, :image)
+      end
   end
 end
