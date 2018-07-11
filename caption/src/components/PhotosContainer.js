@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Photo from './Photo';
 import axios from 'axios';
+import PhotoForm from './PhotoForm'
 import update from 'immutability-helper';
 
 class PhotosContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: []
+      photos: [],
+      editingPhotoId: null
     };
   }
 
@@ -28,22 +30,30 @@ class PhotosContainer extends Component {
       const photos = update(this.state.photos, {
         $splice: [[0, 0, response.data]]
       })
-      this.setState({ photos: photos })
+      this.setState({
+        photos: photos, 
+        editingPhotoId: response.data.id 
+      })
     })
     .catch(error => console.log(error))
   }
 
-
   render () {
     return (
-      <div>
-        <button className="btn btn-primary newPhotoButton"
+      <div className="container">
+        <button className="newPhotoButton btn btn-primary "
           onClick={this.addNewPhoto} >
           New Photo
         </button>
+        <div>
           {this.state.photos.map((photo) => {
-          return (<Photo photo={photo} key={photo.id} />)
+            if(this.state.editingPhotoId === photo.id) {
+              return (<PhotoForm photo={photo} key={photo.id} />)
+            } else {
+              return (<Photo photo={photo} key={photo.id} />)
+            }
         })}
+        </div>
       </div>
     )
   }
