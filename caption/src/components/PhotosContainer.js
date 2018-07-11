@@ -27,12 +27,13 @@ class PhotosContainer extends Component {
       { photo: { caption: '' } }
     )
     .then(response => {
+      console.log(response)
       const photos = update(this.state.photos, {
         $splice: [[0, 0, response.data]]
       })
       this.setState({
-        photos: photos, 
-        editingPhotoId: response.data.id 
+        photos: photos,
+        editingPhotoId: response.data.id
       })
     })
     .catch(error => console.log(error))

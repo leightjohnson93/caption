@@ -11,7 +11,8 @@ module Api::V1
 
     def update
       @photo = Photo.find(params[:id])
-      @idea.update_attributes(photo_params)
+      @photo.update_attributes(photo_params)
+      
       render json: @photo
     end
 

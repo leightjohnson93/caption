@@ -31,14 +31,14 @@ class PhotoForm extends Component {
   render() {
     return (
       <div className="tile">
-        <form 
+        <form
           className="form-control"
           onBlur={this.handleBlur}
         >
           <input
             className="input"
             type="text"
-            name="title"
+            name="caption"
             placeholder="Caption this photo"
             value={this.state.caption}
             onChange={this.handleInput}

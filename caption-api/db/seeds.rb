@@ -24,4 +24,4 @@ Photo.create(
 ])
 
 
-#Photo.find(25).image.attach(io: File.open('./lib/seeds/lights.jpg'), filename: 'lights.jpg')
+Photo.first.image.attach(io: File.open('./lib/seeds/lights.jpg'), filename: 'lights.jpg')
